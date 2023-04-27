@@ -30,13 +30,17 @@ app.get('/news/:id',(req,res)=>{
 
 // 3.Categories Way News 
 
-app.get('/catagoris/:id',(req,res)=>{
-    const id = req.params.id;
-    // console.log(id);
-    const categoriesNews = news.filter(n=>n.category_id === id);
-    res.send(categoriesNews)
+app.get('/catagoris/:id', (req, res) => {
+    const id = parseInt(req.params.id);
+    console.log(id);
+    if (id === 0) {
+        res.send(news)
+    }
+    else {
+        const categoriesNews = news.filter(n => parseInt(n.category_id) === id);
+        res.send(categoriesNews)
+    }
 })
-
 app.listen(port,()=>{
     console.log(`Dragon server APi On Port:${port}`);
 })
